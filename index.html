@@ -1,233 +1,740 @@
-<h2 class="sr-only">Vendrix pricing — Silver, Gold, and Platinum plans with monthly and annual billing toggle</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vendrix — Pricing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0;}
-.root{padding:1.5rem 0;font-family:var(--font-sans);}
-.billing-row{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:2rem;}
-.blabel{font-size:13px;color:var(--color-text-secondary);cursor:pointer;}
-.blabel.on{color:var(--color-text-primary);font-weight:500;}
-.tog{width:40px;height:22px;border-radius:11px;background:var(--color-background-tertiary);border:0.5px solid var(--color-border-secondary);position:relative;cursor:pointer;transition:background .2s;}
-.tog.on{background:#1D9E75;}
-.thumb{position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:white;transition:left .2s;}
-.tog.on .thumb{left:20px;}
-.save{font-size:11px;background:#E1F5EE;color:#0F6E56;padding:2px 8px;border-radius:20px;transition:opacity .2s;}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:2rem;}
-.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.25rem;display:flex;flex-direction:column;gap:12px;}
-.card.mid{border:2px solid #1D9E75;}
-.medal{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex-shrink:0;}
-.medal-s{background:#D3D1C7;color:#444441;}
-.medal-g{background:#FAC775;color:#633806;}
-.medal-p{background:#CECBF6;color:#3C3489;}
-.tier-head{display:flex;align-items:center;gap:10px;}
-.tier-name{font-size:16px;font-weight:500;color:var(--color-text-primary);}
-.tier-sub{font-size:12px;color:var(--color-text-secondary);margin-top:2px;}
-.pop-badge{font-size:11px;background:#E1F5EE;color:#0F6E56;padding:2px 9px;border-radius:20px;font-weight:500;margin-left:auto;}
-.price-block{padding:4px 0;}
-.price-row{display:flex;align-items:baseline;gap:3px;}
-.price{font-size:30px;font-weight:500;color:var(--color-text-primary);}
-.per{font-size:13px;color:var(--color-text-secondary);}
-.og{font-size:12px;color:var(--color-text-tertiary);text-decoration:line-through;margin-left:4px;}
-.pnote{font-size:11px;color:var(--color-text-secondary);margin-top:3px;}
-hr{border:none;border-top:0.5px solid var(--color-border-tertiary);}
-.flist{display:flex;flex-direction:column;gap:7px;flex:1;}
-.fi{display:flex;align-items:flex-start;gap:7px;font-size:12.5px;color:var(--color-text-secondary);line-height:1.45;}
-.ck{width:15px;height:15px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
-.ck-s{background:#D3D1C7;}
-.ck-g{background:#E1F5EE;}
-.ck-p{background:#EEEDFE;}
-.ck svg{width:8px;height:8px;}
-.ds{width:15px;height:15px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--color-text-tertiary);font-size:13px;}
-.lim{font-size:10px;background:var(--color-background-secondary);color:var(--color-text-secondary);padding:1px 6px;border-radius:8px;margin-left:2px;vertical-align:middle;display:inline-block;}
-.ai-lim{font-size:10px;background:#EEEDFE;color:#534AB7;padding:1px 6px;border-radius:8px;margin-left:2px;vertical-align:middle;display:inline-block;}
-.cta{display:block;width:100%;text-align:center;padding:9px;border-radius:var(--border-radius-md);font-size:13px;font-weight:500;cursor:pointer;border:0.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-primary);}
-.cta:hover{background:var(--color-background-secondary);}
-.cta.p{background:#1D9E75;color:white;border-color:#1D9E75;}
-.cta.p:hover{background:#0F6E56;}
-.sec-label{font-size:11px;font-weight:500;color:var(--color-text-tertiary);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;}
-.ctable{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed;}
-.ctable th{padding:8px 10px;font-weight:500;color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary);background:var(--color-background-secondary);text-align:left;}
-.ctable th:not(:first-child){text-align:center;}
-.ctable td{padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary);}
-.ctable td:not(:first-child){text-align:center;}
-.ctable tr:last-child td{border-bottom:none;}
-.ctable .gc{background:color-mix(in srgb,#1D9E75 5%,transparent);}
-.yes-s{color:#5F5E5A;font-size:14px;}
-.yes-g{color:#0F6E56;font-size:14px;}
-.yes-p{color:#534AB7;font-size:14px;}
-.no{color:var(--color-text-tertiary);}
-.vv{color:var(--color-text-primary);font-weight:500;}
-.ai-tag{font-size:10px;background:#EEEDFE;color:#534AB7;padding:1px 5px;border-radius:6px;vertical-align:middle;}
-.section-divider{margin:2rem 0 1.5rem;border-top:0.5px solid var(--color-border-tertiary);}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    background: #f8f8f6;
+    color: #1a1a1a;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* HEADER */
+  header {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    background: #fff;
+  }
+  .logo {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .logo span { color: #BA7517; }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    padding: 3.5rem 0 2.5rem;
+  }
+  .hero h1 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+    color: #111;
+  }
+  .hero p {
+    font-size: 1rem;
+    color: #666;
+    max-width: 460px;
+    margin: 0 auto 2rem;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* BILLING TOGGLE */
+  .billing-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 2.5rem;
+  }
+  .bill-label {
+    font-size: 0.875rem;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.2s;
+    font-weight: 400;
+  }
+  .bill-label.active { color: #1a1a1a; font-weight: 500; }
+  .toggle-track {
+    width: 44px;
+    height: 24px;
+    background: #e8e8e4;
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.2s;
+    border: 1px solid rgba(0,0,0,0.08);
+  }
+  .toggle-track.on { background: #BA7517; border-color: #BA7517; }
+  .toggle-knob {
+    position: absolute;
+    top: 3px; left: 3px;
+    width: 18px; height: 18px;
+    background: #fff;
+    border-radius: 50%;
+    transition: left 0.2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  }
+  .toggle-track.on .toggle-knob { left: 23px; }
+  .save-pill {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #854F0B;
+    background: #FAEEDA;
+    border: 1px solid rgba(186,117,23,0.2);
+    padding: 0.2rem 0.65rem;
+    border-radius: 20px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .save-pill.show { opacity: 1; }
+
+  /* CARDS */
+  .cards-wrap {
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,0.07);
+    overflow: hidden;
+    margin-bottom: 2.5rem;
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .card {
+    padding: 1.75rem 1.5rem;
+    border-right: 1px solid rgba(0,0,0,0.07);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    position: relative;
+  }
+  .card:last-child { border-right: none; }
+  .card.gold { background: #fffdf8; }
+
+  .pop-banner {
+    background: #BA7517;
+    color: #fff;
+    text-align: center;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.4rem;
+  }
+
+  .medal-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .medal {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    flex-shrink: 0;
+  }
+  .medal-s { background: #f0f0ec; color: #5F5E5A; border: 1px solid #D3D1C7; }
+  .medal-g { background: #FAEEDA; color: #854F0B; border: 1px solid rgba(186,117,23,0.25); }
+  .medal-p { background: #EEEDFE; color: #534AB7; border: 1px solid rgba(83,74,183,0.25); }
+
+  .tier-name { font-size: 1rem; font-weight: 600; color: #1a1a1a; letter-spacing: -0.01em; }
+  .tier-name.s { color: #5F5E5A; }
+  .tier-name.g { color: #BA7517; }
+  .tier-name.p { color: #534AB7; }
+  .tier-sub { font-size: 0.78rem; color: #999; margin-top: 1px; }
+
+  .price-block { border-top: 1px solid rgba(0,0,0,0.06); padding-top: 1rem; }
+  .price-row { display: flex; align-items: baseline; gap: 3px; }
+  .price-amount { font-size: 2.25rem; font-weight: 600; letter-spacing: -0.03em; line-height: 1; }
+  .price-amount.s { color: #5F5E5A; }
+  .price-amount.g { color: #BA7517; }
+  .price-amount.p { color: #534AB7; }
+  .price-per { font-size: 0.8rem; color: #999; }
+  .price-orig { font-size: 0.8rem; color: #bbb; text-decoration: line-through; margin-left: 5px; display: none; }
+  .price-note { font-size: 0.72rem; color: #aaa; margin-top: 3px; }
+
+  .feat-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    flex: 1;
+  }
+  .feat-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.82rem;
+    color: #555;
+    line-height: 1.45;
+  }
+  .feat-item.dim { opacity: 0.3; }
+  .feat-check {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .fc-s { background: #f0f0ec; }
+  .fc-g { background: #FAEEDA; }
+  .fc-p { background: #EEEDFE; }
+  .feat-check svg { width: 8px; height: 8px; }
+  .feat-dash { width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #ccc; font-size: 12px; }
+
+  .lim {
+    display: inline-block;
+    font-size: 0.68rem;
+    padding: 1px 6px;
+    border-radius: 5px;
+    margin-left: 3px;
+    vertical-align: middle;
+    background: rgba(0,0,0,0.04);
+    color: #888;
+    border: 1px solid rgba(0,0,0,0.07);
+  }
+  .lim-ai {
+    display: inline-block;
+    font-size: 0.68rem;
+    padding: 1px 6px;
+    border-radius: 5px;
+    margin-left: 3px;
+    vertical-align: middle;
+    background: #EEEDFE;
+    color: #534AB7;
+    border: 1px solid rgba(83,74,183,0.2);
+  }
+
+  .cta-btn {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-decoration: none;
+    border: 1px solid rgba(0,0,0,0.12);
+    background: transparent;
+    color: #444;
+  }
+  .cta-btn:hover { background: #f5f5f2; }
+  .cta-btn.gold-btn {
+    background: #BA7517;
+    border-color: #BA7517;
+    color: #fff;
+    font-weight: 600;
+  }
+  .cta-btn.gold-btn:hover { background: #9e6313; }
+
+  /* COMPARISON TABLE */
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-bottom: 0.75rem;
+  }
+  .compare-wrap {
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,0.07);
+    overflow: hidden;
+    margin-bottom: 2.5rem;
+  }
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+    table-layout: fixed;
+  }
+  .compare-table thead th {
+    padding: 0.875rem 1rem;
+    text-align: left;
+    font-size: 0.78rem;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+    background: #fafaf8;
+    letter-spacing: -0.01em;
+  }
+  .compare-table thead th:not(:first-child) { text-align: center; }
+  .th-s { color: #5F5E5A; }
+  .th-g { color: #BA7517; }
+  .th-p { color: #534AB7; }
+  .compare-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    color: #666;
+    vertical-align: middle;
+  }
+  .compare-table td:not(:first-child) { text-align: center; }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table tr:hover td { background: #fafaf8; }
+  .row-group td {
+    padding: 0.875rem 1rem 0.4rem;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: #bbb;
+    border-bottom: none;
+    background: transparent !important;
+  }
+  .row-label { color: #333; font-weight: 400; }
+  .col-g { background: rgba(186,117,23,0.03); }
+  .yes-s { color: #5F5E5A; font-size: 0.9rem; }
+  .yes-g { color: #BA7517; font-size: 0.9rem; }
+  .yes-p { color: #534AB7; font-size: 0.9rem; }
+  .no-val { color: #ddd; font-size: 0.9rem; }
+  .val-s { color: #5F5E5A; font-weight: 500; }
+  .val-g { color: #BA7517; font-weight: 500; }
+  .val-p { color: #534AB7; font-weight: 500; }
+  .ai-tag { font-size: 0.65rem; background: #EEEDFE; color: #534AB7; padding: 1px 5px; border-radius: 4px; vertical-align: middle; margin-left: 2px; }
+
+  /* FEATURE BLOCKS */
+  .features-section { margin-bottom: 3rem; }
+  .features-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  .features-header h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #111;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.35rem;
+  }
+  .features-header p { font-size: 0.875rem; color: #888; }
+
+  .fb-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .fb {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 12px;
+    padding: 1.25rem;
+    transition: border-color 0.15s;
+  }
+  .fb:hover { border-color: rgba(0,0,0,0.12); }
+  .fb-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.875rem;
+  }
+  .fb-icon svg { width: 18px; height: 18px; }
+  .fbi-o { background: #FAEEDA; }
+  .fbi-b { background: #E6F1FB; }
+  .fbi-p { background: #EEEDFE; }
+  .fbi-t { background: #E1F5EE; }
+  .fb-title { font-size: 0.875rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.35rem; letter-spacing: -0.01em; }
+  .fb-desc { font-size: 0.78rem; color: #777; line-height: 1.65; }
+  .tier-pill {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-size: 0.65rem;
+    font-weight: 500;
+    padding: 2px 7px;
+    border-radius: 5px;
+  }
+  .tp-all { background: #f0f0ec; color: #888; border: 1px solid rgba(0,0,0,0.08); }
+  .tp-gold { background: #FAEEDA; color: #854F0B; border: 1px solid rgba(186,117,23,0.2); }
+  .tp-plat { background: #EEEDFE; color: #534AB7; border: 1px solid rgba(83,74,183,0.2); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid rgba(0,0,0,0.07);
+    background: #fff;
+    padding: 1.25rem 0;
+    margin-top: 2rem;
+    text-align: center;
+  }
+  .footer-note { font-size: 0.78rem; color: #aaa; }
+
+  @media (max-width: 720px) {
+    .cards { grid-template-columns: 1fr; }
+    .fb-grid { grid-template-columns: 1fr; }
+    .compare-table { font-size: 0.75rem; }
+    .compare-table td, .compare-table thead th { padding: 0.65rem 0.75rem; }
+  }
 </style>
+</head>
+<body>
 
-<div class="root">
+<header>
+  <div class="container">
+    <a href="#" class="logo">Vend<span>rix</span></a>
+  </div>
+</header>
 
-<div class="billing-row">
-  <span class="blabel on" id="lm">Monthly</span>
-  <div class="tog" id="tog" onclick="flip()"><div class="thumb"></div></div>
-  <span class="blabel" id="la">Annual</span>
-  <span class="save" id="sv" style="opacity:0;">Save 20%</span>
-</div>
+<div class="container">
 
-<div class="grid">
-
-  <div class="card">
-    <div class="tier-head">
-      <div class="medal medal-s">Ag</div>
-      <div>
-        <div class="tier-name">Silver</div>
-        <div class="tier-sub">Get started</div>
-      </div>
-    </div>
-    <div class="price-block">
-      <div class="price-row">
-        <span class="price" id="sp">$99</span>
-        <span class="per">/mo</span>
-        <span class="og" id="so" style="display:none;">$99</span>
-      </div>
-      <div class="pnote" id="sn">billed monthly</div>
-    </div>
-    <hr>
-    <div class="flist">
-      <div class="fi"><div class="ck ck-s"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" fill="none" stroke="#5F5E5A" stroke-width="1.5"/></svg></div><span>Vendor management <span class="lim">25 vendors</span></span></div>
-      <div class="fi"><div class="ck ck-s"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" fill="none" stroke="#5F5E5A" stroke-width="1.5"/></svg></div><span>RFQ creation and tracking <span class="lim">10/mo</span></span></div>
-      <div class="fi"><div class="ck ck-s"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" fill="none" stroke="#5F5E5A" stroke-width="1.5"/></svg></div><span>Multi-vendor invitations per RFQ</span></div>
-      <div class="fi"><div class="ck ck-s"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" fill="none" stroke="#5F5E5A" stroke-width="1.5"/></svg></div><span>Quote management with margin calculator</span></div>
-      <div class="fi"><div class="ck ck-s"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" fill="none" stroke="#5F5E5A" stroke-width="1.5"/></svg></div><span>Purchase orders <span class="lim">linked to quotes</span></span></div>
-      <div class="fi"><div class="ck ck-s"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" fill="none" stroke="#5F5E5A" stroke-width="1.5"/></svg></div><span>Contract management <span class="lim">25 contracts</span></span></div>
-      <div class="fi"><div class="ck ck-s"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" fill="none" stroke="#5F5E5A" stroke-width="1.5"/></svg></div><span>Invoice management <span class="lim">25 invoices</span></span></div>
-      <div class="fi"><div class="ck ck-s"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" fill="none" stroke="#5F5E5A" stroke-width="1.5"/></svg></div><span>Accounts and contacts</span></div>
-      <div class="fi"><div class="ck ck-s"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" fill="none" stroke="#5F5E5A" stroke-width="1.5"/></svg></div><span>User seats <span class="lim">3 seats</span></span></div>
-      <div class="fi"><div class="ds">—</div><span>Opportunities module</span></div>
-      <div class="fi"><div class="ds">—</div><span>Analytics dashboard</span></div>
-      <div class="fi"><div class="ds">—</div><span>Procurement analytics</span></div>
-      <div class="fi"><div class="ds">—</div><span>AI vendor matching</span></div>
-      <div class="fi"><div class="ds">—</div><span>E-signature</span></div>
-      <div class="fi"><div class="ds">—</div><span>Cloud storage integrations</span></div>
-      <div class="fi"><div class="ds">—</div><span>API access</span></div>
-    </div>
-    <button class="cta">Get started</button>
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Simple, transparent pricing</h1>
+    <p>From your first RFQ to a full procurement operation. No hidden fees, no per-seat surprises.</p>
   </div>
 
-  <div class="card mid">
-    <div class="tier-head">
-      <div class="medal medal-g">Au</div>
-      <div>
-        <div class="tier-name">Gold</div>
-        <div class="tier-sub">Most teams pick this</div>
-      </div>
-      <span class="pop-badge">Most popular</span>
+  <!-- BILLING TOGGLE -->
+  <div class="billing-wrap">
+    <span class="bill-label active" id="lbl-m">Monthly</span>
+    <div class="toggle-track" id="toggle" onclick="flipBilling()">
+      <div class="toggle-knob"></div>
     </div>
-    <div class="price-block">
-      <div class="price-row">
-        <span class="price" id="gp">$249</span>
-        <span class="per">/mo</span>
-        <span class="og" id="go" style="display:none;">$249</span>
-      </div>
-      <div class="pnote" id="gn">billed monthly</div>
-    </div>
-    <hr>
-    <div class="flist">
-      <div class="fi"><div class="ck ck-g"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" fill="none" stroke="#0F6E56" stroke-width="1.5"/></svg></div><span>Everything in Silver</span></div>
-      <div class="fi"><div class="ck ck-g"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" fill="none" stroke="#0F6E56" stroke-width="1.5"/></svg></div><span>Vendors <span class="lim">100 vendors</span></span></div>
-      <div class="fi"><div class="ck ck-g"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" fill="none" stroke="#0F6E56" stroke-width="1.5"/></svg></div><span>RFQs <span class="lim">unlimited</span></span></div>
-      <div class="fi"><div class="ck ck-g"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" fill="none" stroke="#0F6E56" stroke-width="1.5"/></svg></div><span>Unlimited contracts and invoices</span></div>
-      <div class="fi"><div class="ck ck-g"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" fill="none" stroke="#0F6E56" stroke-width="1.5"/></svg></div><span>Opportunities module</span></div>
-      <div class="fi"><div class="ck ck-g"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" fill="none" stroke="#0F6E56" stroke-width="1.5"/></svg></div><span>Analytics dashboard — spend by vendor and category</span></div>
-      <div class="fi"><div class="ck ck-g"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" fill="none" stroke="#0F6E56" stroke-width="1.5"/></svg></div><span>Procurement analytics — quote-to-PO, vendor performance, processing time</span></div>
-      <div class="fi"><div class="ck ck-g"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" fill="none" stroke="#0F6E56" stroke-width="1.5"/></svg></div><span>User seats <span class="lim">10 seats</span></span></div>
-      <div class="fi"><div class="ck ck-g"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" fill="none" stroke="#0F6E56" stroke-width="1.5"/></svg></div><span>Email support <span class="lim">48hr SLA</span></span></div>
-      <div class="fi"><div class="ds">—</div><span>AI vendor matching</span></div>
-      <div class="fi"><div class="ds">—</div><span>E-signature</span></div>
-      <div class="fi"><div class="ds">—</div><span>Cloud storage integrations</span></div>
-      <div class="fi"><div class="ds">—</div><span>API access</span></div>
-    </div>
-    <button class="cta p">Get started</button>
+    <span class="bill-label" id="lbl-a">Annual</span>
+    <span class="save-pill" id="save-pill">Save 20%</span>
   </div>
 
-  <div class="card">
-    <div class="tier-head">
-      <div class="medal medal-p">Pt</div>
-      <div>
-        <div class="tier-name">Platinum</div>
-        <div class="tier-sub">Full power</div>
+  <!-- PRICING CARDS -->
+  <div class="cards-wrap">
+    <div class="pop-banner" style="display:none;" id="pop-bar">Most Popular — Gold</div>
+    <div class="cards">
+
+      <!-- SILVER -->
+      <div class="card">
+        <div class="medal-row">
+          <div class="medal medal-s">Ag</div>
+          <div>
+            <div class="tier-name s">Silver</div>
+            <div class="tier-sub">For teams getting started</div>
+          </div>
+        </div>
+        <div class="price-block">
+          <div class="price-row">
+            <span class="price-amount s" id="s-price">$99</span>
+            <span class="price-per">/month</span>
+            <span class="price-orig" id="s-orig">$99</span>
+          </div>
+          <div class="price-note" id="s-note">billed monthly · cancel anytime</div>
+        </div>
+        <ul class="feat-list">
+          <li class="feat-item"><span class="feat-check fc-s"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>Vendor management <span class="lim">25 vendors</span></span></li>
+          <li class="feat-item"><span class="feat-check fc-s"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>RFQ creation and tracking <span class="lim">10/month</span></span></li>
+          <li class="feat-item"><span class="feat-check fc-s"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>Multi-vendor invitations per RFQ</span></li>
+          <li class="feat-item"><span class="feat-check fc-s"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>Quote management with margin calculator</span></li>
+          <li class="feat-item"><span class="feat-check fc-s"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>Purchase orders linked to quotes</span></li>
+          <li class="feat-item"><span class="feat-check fc-s"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>Contract management <span class="lim">25 active</span></span></li>
+          <li class="feat-item"><span class="feat-check fc-s"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>Invoice management <span class="lim">25 active</span></span></li>
+          <li class="feat-item"><span class="feat-check fc-s"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>Accounts and contacts</span></li>
+          <li class="feat-item"><span class="feat-check fc-s"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>3 user seats</span></li>
+          <li class="feat-item"><span class="feat-check fc-s"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>Email support</span></li>
+          <li class="feat-item dim"><span class="feat-dash">—</span><span>Opportunities pipeline</span></li>
+          <li class="feat-item dim"><span class="feat-dash">—</span><span>Analytics dashboard</span></li>
+        </ul>
+        <a href="#" class="cta-btn">Get started with Silver</a>
       </div>
-    </div>
-    <div class="price-block">
-      <div class="price-row">
-        <span class="price" id="pp">$499</span>
-        <span class="per">/mo</span>
-        <span class="og" id="po" style="display:none;">$499</span>
+
+      <!-- GOLD -->
+      <div class="card gold" style="border-left:2px solid #BA7517;border-right:2px solid #BA7517;">
+        <div style="position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:#BA7517;color:#fff;font-size:0.65rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:0.3rem 0.9rem;border-radius:0 0 8px 8px;white-space:nowrap;">Most popular</div>
+        <div class="medal-row" style="margin-top:0.5rem;">
+          <div class="medal medal-g">Au</div>
+          <div>
+            <div class="tier-name g">Gold</div>
+            <div class="tier-sub">For growing teams</div>
+          </div>
+        </div>
+        <div class="price-block">
+          <div class="price-row">
+            <span class="price-amount g" id="g-price">$249</span>
+            <span class="price-per">/month</span>
+            <span class="price-orig" id="g-orig">$249</span>
+          </div>
+          <div class="price-note" id="g-note">billed monthly · cancel anytime</div>
+        </div>
+        <ul class="feat-list">
+          <li class="feat-item"><span class="feat-check fc-g"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#854F0B" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>Everything in Silver</span></li>
+          <li class="feat-item"><span class="feat-check fc-g"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#854F0B" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>Vendors <span class="lim">100</span></span></li>
+          <li class="feat-item"><span class="feat-check fc-g"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#854F0B" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>Unlimited RFQs per month</span></li>
+          <li class="feat-item"><span class="feat-check fc-g"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#854F0B" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>Unlimited contracts and invoices</span></li>
+          <li class="feat-item"><span class="feat-check fc-g"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#854F0B" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>Opportunities pipeline and tracking</span></li>
+          <li class="feat-item"><span class="feat-check fc-g"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#854F0B" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>Analytics dashboard — spend by vendor and category</span></li>
+          <li class="feat-item"><span class="feat-check fc-g"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#854F0B" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>Procurement analytics — quote-to-PO, vendor performance, processing time</span></li>
+          <li class="feat-item"><span class="feat-check fc-g"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#854F0B" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>Response rate tracking per RFQ</span></li>
+          <li class="feat-item"><span class="feat-check fc-g"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#854F0B" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>10 user seats</span></li>
+          <li class="feat-item"><span class="feat-check fc-g"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#854F0B" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>Priority email support <span class="lim">48hr SLA</span></span></li>
+          <li class="feat-item dim"><span class="feat-dash">—</span><span>AI vendor matching</span></li>
+          <li class="feat-item dim"><span class="feat-dash">—</span><span>E-signature and cloud storage</span></li>
+        </ul>
+        <a href="#" class="cta-btn gold-btn">Get started with Gold</a>
       </div>
-      <div class="pnote" id="pn">billed monthly</div>
+
+      <!-- PLATINUM -->
+      <div class="card">
+        <div class="medal-row">
+          <div class="medal medal-p">Pt</div>
+          <div>
+            <div class="tier-name p">Platinum</div>
+            <div class="tier-sub">For high-volume operations</div>
+          </div>
+        </div>
+        <div class="price-block">
+          <div class="price-row">
+            <span class="price-amount p" id="p-price">$499</span>
+            <span class="price-per">/month</span>
+            <span class="price-orig" id="p-orig">$499</span>
+          </div>
+          <div class="price-note" id="p-note">billed monthly · cancel anytime</div>
+        </div>
+        <ul class="feat-list">
+          <li class="feat-item"><span class="feat-check fc-p"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>Everything in Gold</span></li>
+          <li class="feat-item"><span class="feat-check fc-p"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>Unlimited vendors and user seats</span></li>
+          <li class="feat-item"><span class="feat-check fc-p"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>AI vendor matching <span class="lim-ai">AI</span></span></li>
+          <li class="feat-item"><span class="feat-check fc-p"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>E-signature on contracts and quotes</span></li>
+          <li class="feat-item"><span class="feat-check fc-p"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>Google Drive, S3, Dropbox integration</span></li>
+          <li class="feat-item"><span class="feat-check fc-p"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>API access and webhooks</span></li>
+          <li class="feat-item"><span class="feat-check fc-p"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>Custom form builder with CSS branding</span></li>
+          <li class="feat-item"><span class="feat-check fc-p"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>Automated vendor reminders</span></li>
+          <li class="feat-item"><span class="feat-check fc-p"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>Data export CSV</span></li>
+          <li class="feat-item"><span class="feat-check fc-p"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>Dedicated onboarding call</span></li>
+          <li class="feat-item"><span class="feat-check fc-p"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>Priority support <span class="lim">24hr SLA</span></span></li>
+          <li class="feat-item"><span class="feat-check fc-p"><svg viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>Early access to all new features</span></li>
+        </ul>
+        <a href="#" class="cta-btn">Get started with Platinum</a>
+      </div>
+
     </div>
-    <hr>
-    <div class="flist">
-      <div class="fi"><div class="ck ck-p"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" fill="none" stroke="#534AB7" stroke-width="1.5"/></svg></div><span>Everything in Gold</span></div>
-      <div class="fi"><div class="ck ck-p"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" fill="none" stroke="#534AB7" stroke-width="1.5"/></svg></div><span>Unlimited vendors</span></div>
-      <div class="fi"><div class="ck ck-p"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" fill="none" stroke="#534AB7" stroke-width="1.5"/></svg></div><span>Unlimited user seats</span></div>
-      <div class="fi"><div class="ck ck-p"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" fill="none" stroke="#534AB7" stroke-width="1.5"/></svg></div><span>AI vendor matching <span class="ai-lim">AI</span></span></div>
-      <div class="fi"><div class="ck ck-p"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" fill="none" stroke="#534AB7" stroke-width="1.5"/></svg></div><span>E-signature on contracts and quotes</span></div>
-      <div class="fi"><div class="ck ck-p"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" fill="none" stroke="#534AB7" stroke-width="1.5"/></svg></div><span>Google Drive, S3, Dropbox integration</span></div>
-      <div class="fi"><div class="ck ck-p"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" fill="none" stroke="#534AB7" stroke-width="1.5"/></svg></div><span>API access and webhooks</span></div>
-      <div class="fi"><div class="ck ck-p"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" fill="none" stroke="#534AB7" stroke-width="1.5"/></svg></div><span>Custom form builder with CSS branding</span></div>
-      <div class="fi"><div class="ck ck-p"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" fill="none" stroke="#534AB7" stroke-width="1.5"/></svg></div><span>Dedicated onboarding call</span></div>
-      <div class="fi"><div class="ck ck-p"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" fill="none" stroke="#534AB7" stroke-width="1.5"/></svg></div><span>Priority support <span class="lim">24hr SLA</span></span></div>
-      <div class="fi"><div class="ck ck-p"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" fill="none" stroke="#534AB7" stroke-width="1.5"/></svg></div><span>Data export CSV</span></div>
-      <div class="fi"><div class="ck ck-p"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" fill="none" stroke="#534AB7" stroke-width="1.5"/></svg></div><span>Early access to all new features</span></div>
+  </div>
+
+  <!-- COMPARISON TABLE -->
+  <div class="section-label">Full feature comparison</div>
+  <div class="compare-wrap">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th style="width:40%;">Feature</th>
+          <th style="width:20%;" class="th-s">Silver</th>
+          <th style="width:20%;" class="th-g col-g">Gold</th>
+          <th style="width:20%;" class="th-p">Platinum</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="row-group"><td colspan="4">Limits</td></tr>
+        <tr><td class="row-label">Vendors</td><td><span class="val-s">25</span></td><td class="col-g"><span class="val-g">100</span></td><td><span class="val-p">Unlimited</span></td></tr>
+        <tr><td class="row-label">RFQs per month</td><td><span class="val-s">10</span></td><td class="col-g"><span class="val-g">Unlimited</span></td><td><span class="val-p">Unlimited</span></td></tr>
+        <tr><td class="row-label">Contracts and invoices</td><td><span class="val-s">25 each</span></td><td class="col-g"><span class="val-g">Unlimited</span></td><td><span class="val-p">Unlimited</span></td></tr>
+        <tr><td class="row-label">User seats</td><td><span class="val-s">3</span></td><td class="col-g"><span class="val-g">10</span></td><td><span class="val-p">Unlimited</span></td></tr>
+
+        <tr class="row-group"><td colspan="4">Core workflow</td></tr>
+        <tr><td class="row-label">Vendor management</td><td><span class="yes-s">✓</span></td><td class="col-g"><span class="yes-g">✓</span></td><td><span class="yes-p">✓</span></td></tr>
+        <tr><td class="row-label">RFQ creation and tracking</td><td><span class="yes-s">✓</span></td><td class="col-g"><span class="yes-g">✓</span></td><td><span class="yes-p">✓</span></td></tr>
+        <tr><td class="row-label">Multi-vendor invitations</td><td><span class="yes-s">✓</span></td><td class="col-g"><span class="yes-g">✓</span></td><td><span class="yes-p">✓</span></td></tr>
+        <tr><td class="row-label">Quote management + margin calculator</td><td><span class="yes-s">✓</span></td><td class="col-g"><span class="yes-g">✓</span></td><td><span class="yes-p">✓</span></td></tr>
+        <tr><td class="row-label">Purchase orders</td><td><span class="yes-s">✓</span></td><td class="col-g"><span class="yes-g">✓</span></td><td><span class="yes-p">✓</span></td></tr>
+        <tr><td class="row-label">Contract management</td><td><span class="yes-s">✓</span></td><td class="col-g"><span class="yes-g">✓</span></td><td><span class="yes-p">✓</span></td></tr>
+        <tr><td class="row-label">Invoice management</td><td><span class="yes-s">✓</span></td><td class="col-g"><span class="yes-g">✓</span></td><td><span class="yes-p">✓</span></td></tr>
+        <tr><td class="row-label">Accounts and contacts</td><td><span class="yes-s">✓</span></td><td class="col-g"><span class="yes-g">✓</span></td><td><span class="yes-p">✓</span></td></tr>
+
+        <tr class="row-group"><td colspan="4">Analytics</td></tr>
+        <tr><td class="row-label">Opportunities pipeline</td><td><span class="no-val">—</span></td><td class="col-g"><span class="yes-g">✓</span></td><td><span class="yes-p">✓</span></td></tr>
+        <tr><td class="row-label">Analytics dashboard</td><td><span class="no-val">—</span></td><td class="col-g"><span class="yes-g">✓</span></td><td><span class="yes-p">✓</span></td></tr>
+        <tr><td class="row-label">Procurement analytics</td><td><span class="no-val">—</span></td><td class="col-g"><span class="yes-g">✓</span></td><td><span class="yes-p">✓</span></td></tr>
+        <tr><td class="row-label">Response rate tracking</td><td><span class="no-val">—</span></td><td class="col-g"><span class="yes-g">✓</span></td><td><span class="yes-p">✓</span></td></tr>
+        <tr><td class="row-label">Data export CSV</td><td><span class="no-val">—</span></td><td class="col-g"><span class="no-val">—</span></td><td><span class="yes-p">✓</span></td></tr>
+
+        <tr class="row-group"><td colspan="4">Advanced features</td></tr>
+        <tr><td class="row-label">AI vendor matching <span class="ai-tag">AI</span></td><td><span class="no-val">—</span></td><td class="col-g"><span class="no-val">—</span></td><td><span class="yes-p">✓</span></td></tr>
+        <tr><td class="row-label">E-signature</td><td><span class="no-val">—</span></td><td class="col-g"><span class="no-val">—</span></td><td><span class="yes-p">✓</span></td></tr>
+        <tr><td class="row-label">Cloud storage integrations</td><td><span class="no-val">—</span></td><td class="col-g"><span class="no-val">—</span></td><td><span class="yes-p">✓</span></td></tr>
+        <tr><td class="row-label">API access and webhooks</td><td><span class="no-val">—</span></td><td class="col-g"><span class="no-val">—</span></td><td><span class="yes-p">✓</span></td></tr>
+        <tr><td class="row-label">Custom form builder</td><td><span class="no-val">—</span></td><td class="col-g"><span class="no-val">—</span></td><td><span class="yes-p">✓</span></td></tr>
+        <tr><td class="row-label">Automated vendor reminders</td><td><span class="no-val">—</span></td><td class="col-g"><span class="no-val">—</span></td><td><span class="yes-p">✓</span></td></tr>
+
+        <tr class="row-group"><td colspan="4">Support</td></tr>
+        <tr><td class="row-label">Support channel</td><td><span class="val-s">Email</span></td><td class="col-g"><span class="val-g">Priority email</span></td><td><span class="val-p">Priority + onboarding</span></td></tr>
+        <tr><td class="row-label">Response SLA</td><td><span class="val-s">Best effort</span></td><td class="col-g"><span class="val-g">48 hours</span></td><td><span class="val-p">24 hours</span></td></tr>
+        <tr><td class="row-label">Dedicated onboarding call</td><td><span class="no-val">—</span></td><td class="col-g"><span class="no-val">—</span></td><td><span class="yes-p">✓</span></td></tr>
+        <tr><td class="row-label">Early access to new features</td><td><span class="no-val">—</span></td><td class="col-g"><span class="no-val">—</span></td><td><span class="yes-p">✓</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FEATURE BLOCKS -->
+  <div class="features-section">
+    <div class="features-header">
+      <h2>Everything you need to run vendor operations end-to-end</h2>
+      <p>All plans include the core procurement workflow. No setup fees, no hidden costs.</p>
     </div>
-    <button class="cta">Get started</button>
+    <div class="fb-grid">
+
+      <div class="fb">
+        <div class="fb-icon fbi-o">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#BA7517" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+          </svg>
+        </div>
+        <div class="fb-title">RFQ to Purchase Order</div>
+        <div class="fb-desc">Create an RFQ, invite multiple vendors, compare quotes side by side, and convert to a PO — all in one flow. Response rates tracked automatically.</div>
+        <span class="tier-pill tp-all">All plans</span>
+      </div>
+
+      <div class="fb">
+        <div class="fb-icon fbi-o">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#BA7517" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+          </svg>
+        </div>
+        <div class="fb-title">Vendor management</div>
+        <div class="fb-desc">Centralized vendor database with categories, certifications, contact info, location, and performance tracking. Onboard new vendors directly from the platform.</div>
+        <span class="tier-pill tp-all">All plans</span>
+      </div>
+
+      <div class="fb">
+        <div class="fb-icon fbi-o">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#BA7517" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+          </svg>
+        </div>
+        <div class="fb-title">Contract and invoice management</div>
+        <div class="fb-desc">Track every contract with status, start and end dates, and time remaining. Manage invoices from creation through approval, linked to the vendor that raised them.</div>
+        <span class="tier-pill tp-all">All plans</span>
+      </div>
+
+      <div class="fb">
+        <div class="fb-icon fbi-b">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#185FA5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 20V10M12 20V4M6 20v-6"/>
+          </svg>
+        </div>
+        <div class="fb-title">Analytics and procurement insights</div>
+        <div class="fb-desc">Spend by vendor and category, quote-to-PO conversion, vendor performance scores, and processing time. See exactly where your procurement stands.</div>
+        <span class="tier-pill tp-gold">Gold and above</span>
+      </div>
+
+      <div class="fb">
+        <div class="fb-icon fbi-b">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#185FA5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
+        </div>
+        <div class="fb-title">Opportunities pipeline</div>
+        <div class="fb-desc">Track sales opportunities with stage, probability, amount, and close date. Link them to RFQs so sales and procurement teams work from one source of truth.</div>
+        <span class="tier-pill tp-gold">Gold and above</span>
+      </div>
+
+      <div class="fb">
+        <div class="fb-icon fbi-p">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+          </svg>
+        </div>
+        <div class="fb-title">AI vendor matching</div>
+        <div class="fb-desc">Automatically shortlist the best vendors for each RFQ based on past performance, location, pricing history, and category expertise. Less searching, faster decisions.</div>
+        <span class="tier-pill tp-plat">Platinum only</span>
+      </div>
+
+      <div class="fb">
+        <div class="fb-icon fbi-p">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+          </svg>
+        </div>
+        <div class="fb-title">E-signature</div>
+        <div class="fb-desc">Sign contracts and client quotes directly in the platform. No external tools needed. Signed documents are stored and linked to the originating vendor record.</div>
+        <span class="tier-pill tp-plat">Platinum only</span>
+      </div>
+
+      <div class="fb">
+        <div class="fb-icon fbi-p">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 002-2v-4M17 9l-5 5-5-5M12 12.8V2.5"/>
+          </svg>
+        </div>
+        <div class="fb-title">Cloud storage integrations</div>
+        <div class="fb-desc">Connect Google Drive, Amazon S3, or Dropbox to store RFQ documents, signed contracts, and vendor files — wherever your team already works.</div>
+        <span class="tier-pill tp-plat">Platinum only</span>
+      </div>
+
+      <div class="fb">
+        <div class="fb-icon fbi-t">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0F6E56" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+          </svg>
+        </div>
+        <div class="fb-title">API access and webhooks</div>
+        <div class="fb-desc">Connect Vendrix to your existing tools. Trigger events on quote approval, PO creation, or contract expiry. Build custom workflows around your procurement process.</div>
+        <span class="tier-pill tp-plat">Platinum only</span>
+      </div>
+
+    </div>
   </div>
 
 </div>
 
-<div class="sec-label">Feature comparison</div>
-<table class="ctable">
-  <thead>
-    <tr>
-      <th style="width:38%;">Feature</th>
-      <th style="width:20%;">Silver</th>
-      <th style="width:21%;" class="gc">Gold</th>
-      <th style="width:21%;">Platinum</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>Vendors</td><td><span class="vv">25</span></td><td class="gc"><span class="vv">100</span></td><td><span class="vv">Unlimited</span></td></tr>
-    <tr><td>RFQs per month</td><td><span class="vv">10</span></td><td class="gc"><span class="yes-g">Unlimited</span></td><td><span class="yes-p">Unlimited</span></td></tr>
-    <tr><td>Quotes and POs</td><td><span class="yes-s">Unlimited</span></td><td class="gc"><span class="yes-g">Unlimited</span></td><td><span class="yes-p">Unlimited</span></td></tr>
-    <tr><td>Contracts and invoices</td><td><span class="vv">25 each</span></td><td class="gc"><span class="yes-g">Unlimited</span></td><td><span class="yes-p">Unlimited</span></td></tr>
-    <tr><td>User seats</td><td><span class="vv">3</span></td><td class="gc"><span class="vv">10</span></td><td><span class="yes-p">Unlimited</span></td></tr>
-    <tr><td>Opportunities module</td><td><span class="no">—</span></td><td class="gc"><span class="yes-g">✓</span></td><td><span class="yes-p">✓</span></td></tr>
-    <tr><td>Analytics dashboard</td><td><span class="no">—</span></td><td class="gc"><span class="yes-g">✓</span></td><td><span class="yes-p">✓</span></td></tr>
-    <tr><td>Procurement analytics</td><td><span class="no">—</span></td><td class="gc"><span class="yes-g">✓</span></td><td><span class="yes-p">✓</span></td></tr>
-    <tr><td>AI vendor matching</td><td><span class="no">—</span></td><td class="gc"><span class="no">—</span></td><td><span class="yes-p">✓ <span class="ai-tag">AI</span></span></td></tr>
-    <tr><td>E-signature</td><td><span class="no">—</span></td><td class="gc"><span class="no">—</span></td><td><span class="yes-p">✓</span></td></tr>
-    <tr><td>Cloud storage integrations</td><td><span class="no">—</span></td><td class="gc"><span class="no">—</span></td><td><span class="yes-p">✓</span></td></tr>
-    <tr><td>API access</td><td><span class="no">—</span></td><td class="gc"><span class="no">—</span></td><td><span class="yes-p">✓</span></td></tr>
-    <tr><td>Custom form builder</td><td><span class="no">—</span></td><td class="gc"><span class="no">—</span></td><td><span class="yes-p">✓</span></td></tr>
-    <tr><td>Support</td><td><span class="vv">Email</span></td><td class="gc"><span class="vv">48hr SLA</span></td><td><span class="vv">24hr + onboarding</span></td></tr>
-  </tbody>
-</table>
-
-</div>
+<footer>
+  <div class="container">
+    <p class="footer-note">All plans include a 14-day free trial. No credit card required. Cancel anytime.</p>
+  </div>
+</footer>
 
 <script>
-let ann=false;
-const prices={s:99,g:249,p:499};
-function flip(){
-  ann=!ann;
-  document.getElementById('tog').classList.toggle('on',ann);
-  document.getElementById('lm').classList.toggle('on',!ann);
-  document.getElementById('la').classList.toggle('on',ann);
-  document.getElementById('sv').style.opacity=ann?'1':'0';
-  const disc=ann?0.8:1;
-  const note=ann?'per month, billed annually':'billed monthly';
-  ['s','g','p'].forEach(k=>{
-    const m=Math.round(prices[k]*disc);
-    document.getElementById(k+'p').textContent='$'+m;
-    const og=document.getElementById(k+'o');
-    og.style.display=ann?'inline':'none';
-    og.textContent='$'+prices[k];
-    document.getElementById(k+'n').textContent=note;
-  });
-}
+  let annual = false;
+  const prices = { s: 99, g: 249, p: 499 };
+
+  function flipBilling() {
+    annual = !annual;
+    const toggle = document.getElementById('toggle');
+    const lblM = document.getElementById('lbl-m');
+    const lblA = document.getElementById('lbl-a');
+    const pill = document.getElementById('save-pill');
+
+    toggle.classList.toggle('on', annual);
+    lblM.classList.toggle('active', !annual);
+    lblA.classList.toggle('active', annual);
+    pill.classList.toggle('show', annual);
+
+    const disc = annual ? 0.8 : 1;
+    const note = annual ? 'per month, billed annually · cancel anytime' : 'billed monthly · cancel anytime';
+
+    ['s', 'g', 'p'].forEach(k => {
+      const shown = Math.round(prices[k] * disc);
+      document.getElementById(k + '-price').textContent = '$' + shown;
+      const orig = document.getElementById(k + '-orig');
+      orig.style.display = annual ? 'inline' : 'none';
+      orig.textContent = '$' + prices[k];
+      document.getElementById(k + '-note').textContent = note;
+    });
+  }
 </script>
+</body>
+</html>
